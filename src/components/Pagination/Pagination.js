@@ -6,30 +6,31 @@ class Pagination extends Component {
     maxPage: 50, // as specify in api doc that product count is 1000
   };
   handleClick = (type) => {
-    if (type === 'next' && this.props.currPage < this.state.maxPage) {
-      this.props.paginationCallback(this.props.currPage + 1);
-    } else if (type === 'pre' && this.props.currPage > 1) {
-      this.props.paginationCallback(this.props.currPage - 1);
+    const { maxPage } = this.state;
+    const { currPage, paginationCallback } = this.props;
+    const page = parseInt(currPage);
+    if (type === 'next' && page < maxPage) {
+      paginationCallback(page + 1);
+    } else if (type === 'pre' && page > 1) {
+      paginationCallback(page - 1);
     }
   };
 
   render() {
+    const { currPage } = this.props;
+    const { maxPage } = this.state;
     return (
       <div className='pagination'>
-        <div> Current Page: {this.props.currPage}</div>
+        <div> Current Page: {currPage}</div>
         <div>
           <span
-            style={this.props.currPage <= 1 ? { color: '#808080' } : {}}
+            style={currPage <= 1 ? { color: '#808080' } : {}}
             onClick={() => this.handleClick('pre')}
           >
             Previous |{' '}
           </span>
           <span
-            style={
-              this.props.currPage >= this.state.maxPage - 1
-                ? { color: '#808080' }
-                : {}
-            }
+            style={currPage >= maxPage - 1 ? { color: '#808080' } : {}}
             onClick={() => this.handleClick('next')}
           >
             Next

@@ -13,6 +13,6 @@ module.exports = {
     '@babel/preset-flow',
     '@babel/preset-react',
   ],
-  plugins: [],
+  plugins: [['@babel/plugin-proposal-class-properties', { loose: false }]],
   ignore: ['node_modules', 'build'],
 };
