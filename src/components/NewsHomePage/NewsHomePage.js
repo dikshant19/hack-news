@@ -37,6 +37,7 @@ class NewsHomePage extends Component {
     // Updating Redux store with updated value
     this.props.receiveData(newsData);
   };
+
   paginationCallback = (page) => {
     this.setState({ pageNum: page }, () =>
       this.props.fetchHackNews(this.state.pageNum)
@@ -46,7 +47,6 @@ class NewsHomePage extends Component {
   render() {
     const { newsData } = this.props;
     const news = newsData.data && newsData.data.hits;
-
     if (newsData.isFetching) {
       return <div className='loader'>Loading...</div>;
     }
@@ -76,7 +76,6 @@ class NewsHomePage extends Component {
                   </td>
                   <td className='row-4'>
                     <div className='detail-box'>
-                      {/* <div> */}
                       {item.title}{' '}
                       <div className='subText'>
                         ({item.url}) by <span className='boldTxt'>author</span>{' '}

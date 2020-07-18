@@ -22,7 +22,7 @@ class Pagination extends Component {
             style={this.props.currPage <= 1 ? { color: '#808080' } : {}}
             onClick={() => this.handleClick('pre')}
           >
-            Previos |{' '}
+            Previous |{' '}
           </span>
           <span
             style={

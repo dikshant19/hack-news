@@ -51,7 +51,7 @@ thead {
   }
 
   tr:nth-child(odd) {
-    background: #ccc;
+    background: rgb(255, 102, 0);
   }
 
   td {

@@ -1,4 +1,4 @@
-import { REQUEST_DATA, RECEIVE_DATA } from '../actions/fetchNewsData';
+import { REQUEST_DATA, RECEIVE_DATA } from '../constant';
 
 const fetchNewsData = (state = { isFetching: false }, action) => {
   switch (action.type) {

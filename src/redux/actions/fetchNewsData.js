@@ -1,5 +1,5 @@
-export const REQUEST_DATA = 'REQUEST_DATA';
-export const RECEIVE_DATA = 'RECEIVE_DATA';
+import { REQUEST_DATA, RECEIVE_DATA } from '../constant';
+import { FETCH_NEWS } from '../urls';
 
 const requestData = () => {
   return {
@@ -17,9 +17,10 @@ export const receiveData = (payload) => {
 export const fetchHackNews = (pageNum) => {
   return (dispatch) => {
     dispatch(requestData());
-    return fetch(`https://hn.algolia.com/api/v1/search?page=${pageNum}`)
+    return fetch(FETCH_NEWS(pageNum))
       .then((response) => response.json())
       .then((json) => {
+        // Using localStorage as DB to store/update data
         if (
           localStorage.getItem('currentPage') === pageNum &&
           localStorage.getItem('newsData')
