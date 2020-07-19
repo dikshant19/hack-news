@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 const store = configureStore();
 
+app.listen(PORT, () => {
+  console.log('Listening on Port ' + PORT);
+});
 app.get('/', (req, res) => {
   const preloadedState = store.getState();
 
