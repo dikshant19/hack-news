@@ -57,6 +57,7 @@ class NewsHomePage extends Component {
       this.handleChartData();
       this.props.fetchHackNews(this.state.pageNum);
     });
+    this.handleChartData();
   };
 
   render() {
