@@ -3,15 +3,28 @@ import { connect } from 'react-redux';
 import './NewsHomePage.css';
 import { fetchHackNews, receiveData } from '../../redux/actions/fetchNewsData';
 import Pagination from '../Pagination/Pagination';
-
+import VoteChart from '../Charts/voteChart';
 class NewsHomePage extends Component {
   state = {
     pageNum: localStorage.getItem('currentPage') || 1,
+    chartData: [],
   };
 
   componentDidMount() {
     this.props.fetchHackNews(this.state.pageNum);
+    this.handleChartData();
   }
+
+  handleChartData = () => {
+    const newsData = JSON.parse(localStorage.getItem('newsData'));
+    const data = [];
+    newsData &&
+      newsData.hits.map((el) => {
+        if (el.objectID && el.points) data.push([el.objectID, el.points]);
+        return 0;
+      });
+    this.setState({ chartData: data });
+  };
 
   actionTakenOnNews = (type, item) => {
     const newsData = JSON.parse(localStorage.getItem('newsData'));
@@ -35,13 +48,15 @@ class NewsHomePage extends Component {
     // Updating localStorage as No API is supported to update data
     localStorage.setItem('newsData', JSON.stringify(newsData));
     // Updating Redux store with updated value
+    this.handleChartData();
     this.props.receiveData(newsData);
   };
 
   paginationCallback = (page) => {
-    this.setState({ pageNum: page }, () =>
-      this.props.fetchHackNews(this.state.pageNum)
-    );
+    this.setState({ pageNum: page }, () => {
+      this.handleChartData();
+      this.props.fetchHackNews(this.state.pageNum);
+    });
   };
 
   render() {
@@ -98,6 +113,7 @@ class NewsHomePage extends Component {
           currPage={this.state.pageNum}
           paginationCallback={this.paginationCallback}
         />
+        <VoteChart data={this.state.chartData} />
       </div>
     );
   }
