@@ -8,10 +8,17 @@ import configureStore from '../src/redux/configureStore';
 
 import App from '../src/App';
 
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 const store = configureStore();
 
+app.listen(process.env.PORT || 3000, function () {
+  console.log(
+    'Express server listening on port %d in %s mode',
+    this.address().port,
+    app.settings.env
+  );
+});
 app.get('/', (req, res) => {
   const preloadedState = store.getState();
 
