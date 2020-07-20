@@ -5,7 +5,7 @@ export default function VoteChart(props) {
   const data = React.useMemo(
     () => [
       {
-        label: 'vote chart',
+        label: 'vote count',
         data: props.data,
       },
     ],
@@ -27,7 +27,7 @@ export default function VoteChart(props) {
         height: '300px',
       }}
     >
-      <Chart data={data} axes={axes} />
+      <Chart data={data} axes={axes} tooltip />
     </div>
   );
 }

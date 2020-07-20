@@ -25,7 +25,9 @@ app.get('/', (req, res) => {
   fs.readFile(indexFile, 'utf8', (err, data) => {
     if (err) {
       console.error('Something went wrong:', err);
-      return res.status(500).send('Oops, Something went wrong!');
+      return res
+        .status(500)
+        .send('Oops, Something went wrong! Please try refreshing page');
     }
     return res.send(
       data.replace('<div id="root"></div>', `<div id="root">${html}</div>`)
